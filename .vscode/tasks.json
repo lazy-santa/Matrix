@@ -1,28 +1,43 @@
 {
+    "version": "2.0.0",
     "tasks": [
         {
-            "type": "cppbuild",
-            "label": "C/C++: gcc.exe сборка активного файла",
-            "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe",
+            "label": "Build1",
+            "type": "shell",
+            "command": "C:/msys64/mingw64/bin/g++.exe",
             "args": [
-                "-fdiagnostics-color=always",
-                "-g",
-                "${file}",
+                "-c",
                 "-o",
-                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+                "${workspaceRoot}\\build\\${workspaceFolderBasename}.o",
+                "${file}",
+                "-I\"C:\\msys64\\mingw64\\include\""
+            ]
+        },
+        {
+            "label": "Build2",
+            "type": "shell",
+            "command": "C:/msys64/mingw64/bin/g++.exe",
+            "args": [
+                "-o",
+                "${workspaceRoot}\\build\\${workspaceFolderBasename}.exe",
+                "${workspaceRoot}\\build\\${workspaceFolderBasename}.o",
+                "-L\"C:\\msys64\\mingw64\\lib\"",
+                "-lfreeglut",
+                "-lopengl32",
+                "-lglu32",
+                "-lgdi32"
             ],
-            "options": {
-                "cwd": "${fileDirname}"
-            },
-            "problemMatcher": [
-                "$gcc"
-            ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "detail": "Задача создана отладчиком."
+            "dependsOn": [
+                "Build1"
+            ]
+        },
+        {
+            "label": "Run",
+            "type": "shell",
+            "command": "${workspaceRoot}\\build\\${workspaceFolderBasename}.exe",
+            "dependsOn": [
+                "Build2"
+            ]
         }
-    ],
-    "version": "2.0.0"
+    ]
 }
