@@ -2,7 +2,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Build1",
+            "label": "MyBuild1",
             "type": "shell",
             "command": "C:/msys64/mingw64/bin/g++.exe",
             "args": [
@@ -14,7 +14,7 @@
             ]
         },
         {
-            "label": "Build2",
+            "label": "MyBuild2",
             "type": "shell",
             "command": "C:/msys64/mingw64/bin/g++.exe",
             "args": [
@@ -28,15 +28,15 @@
                 "-lgdi32"
             ],
             "dependsOn": [
-                "Build1"
+                "MyBuild1"
             ]
         },
         {
-            "label": "Run",
+            "label": "myRun",
             "type": "shell",
             "command": "${workspaceRoot}\\build\\${workspaceFolderBasename}.exe",
             "dependsOn": [
-                "Build2"
+                "MyBuild2"
             ]
         }
     ]
