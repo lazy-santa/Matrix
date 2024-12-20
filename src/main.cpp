@@ -48,40 +48,40 @@ void display() // функция отрисовки
     glBegin(GL_QUADS);
 
     glNormal3f(0.0f, 0.0f, -1.0f); // нормаль к грани
-    glVertex3f(-0.5, -0.5, -0.5);  // левая грань
-    glVertex3f(0.5, -0.5, -0.5);
-    glVertex3f(0.5, 0.5, -0.5);
-    glVertex3f(-0.5, 0.5, -0.5);
+    glVertex3f(-0.5, 0.1, 0.4);    // левая грань
+    glVertex3f(-0.4, -0.1, 0.4);
+    glVertex3f(-0.4, -0.1, -0.4);
+    glVertex3f(-0.5, 0.1, -0.4);
 
     glNormal3f(0.0f, 0.0f, 1.0f); // нормаль к грани
-    glVertex3f(-0.5, -0.5, 0.5);  // правая грань
-    glVertex3f(0.5, -0.5, 0.5);
-    glVertex3f(0.5, 0.5, 0.5);
-    glVertex3f(-0.5, 0.5, 0.5);
+    glVertex3f(0.5, 0.1, -0.4);   // правая грань
+    glVertex3f(0.4, -0.1, -0.4);
+    glVertex3f(0.4, -0.1, 0.4);
+    glVertex3f(0.5, 0.1, 0.4);
 
     glNormal3f(-1.0f, 0.0f, 0.0f); // нормаль к грани
-    glVertex3f(-0.5, -0.5, -0.5);  // задняя грань
-    glVertex3f(-0.5, -0.5, 0.5);
-    glVertex3f(-0.5, 0.5, 0.5);
-    glVertex3f(-0.5, 0.5, -0.5);
+    glVertex3f(0.5, 0.1, -0.4);    // задняя грань
+    glVertex3f(0.4, -0.1, -0.4);
+    glVertex3f(-0.4, -0.1, -0.4);
+    glVertex3f(-0.5, 0.1, -0.4);
 
     glNormal3f(1.0f, 0.0f, 0.0f); // нормаль к грани
-    glVertex3f(0.5, -0.5, -0.5);  // передняя грань
-    glVertex3f(0.5, -0.5, 0.5);
-    glVertex3f(0.5, 0.5, 0.5);
-    glVertex3f(0.5, 0.5, -0.5);
+    glVertex3f(0.5, 0.1, 0.4);    // передняя грань
+    glVertex3f(0.4, -0.1, 0.4);
+    glVertex3f(-0.4, -0.1, 0.4);
+    glVertex3f(-0.5, 0.1, 0.4);
 
     glNormal3f(0.0f, -1.0f, 0.0f); // нормаль к грани
-    glVertex3f(-0.5, -0.5, -0.5);  // нижняя грань
-    glVertex3f(0.5, -0.5, -0.5);
-    glVertex3f(0.5, -0.5, 0.5);
-    glVertex3f(-0.5, -0.5, 0.5);
+    glVertex3f(0.4, -0.1, -0.4);   // нижняя грань
+    glVertex3f(0.4, -0.1, 0.4);
+    glVertex3f(-0.4, -0.1, 0.4);
+    glVertex3f(-0.4, -0.1, -0.4);
 
     glNormal3f(0.0f, 1.0f, 0.0f); // нормаль к грани
-    glVertex3f(-0.5, 0.5, -0.5);  // верхняя грань
-    glVertex3f(0.5, 0.5, -0.5);
-    glVertex3f(0.5, 0.5, 0.5);
-    glVertex3f(-0.5, 0.5, 0.5);
+    glVertex3f(0.5, 0.1, -0.4);   // верхняя грань
+    glVertex3f(0.5, 0.1, 0.4);
+    glVertex3f(-0.5, 0.1, 0.4);
+    glVertex3f(-0.5, 0.1, -0.4);
 
     glEnd(); // заканчиваем рисовать
 
@@ -118,7 +118,7 @@ int main(int argc, char **argv)
     glutInitWindowSize(700, 700);
     // позиция окна
     glutInitWindowPosition(250, 50);
-    glutCreateWindow("Rotate Cub");
+    glutCreateWindow("Rotate Tank");
 
     initLighting(); // вызываем настройку освещенности
 
