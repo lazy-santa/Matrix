@@ -2,6 +2,8 @@
 // Реализация вращения фигуры
 
 #include <GL/glut.h>
+static GLfloat xRot = 0.0f; // угол поворота по X
+static GLfloat yRot = 0.0f; // угол поворота по Y
 
 GLfloat light_position[] = {1.0f, 1.0f, 1.0f, 0.0f};
 GLfloat ambient_light[] = {0.2f, 0.2f, 0.2f, 1.0f};  // окружающее
@@ -12,8 +14,6 @@ GLfloat material_ambient[] = {0.5f, 0.5f, 0.5f, 1.0f};
 GLfloat material_diffuse[] = {0.0f, 1.0f, 0.0f, 1.0f}; // материал будет зеленого цвета
 GLfloat material_specular[] = {1.0f, 1.0f, 1.0f, 1.0f};
 GLfloat material_shininess = 50.f;
-
-float angle = 0.0f; // угол поворота
 
 void initLighting() // инициализация освещения
 {
@@ -37,11 +37,12 @@ void display() // функция отрисовки
     glClearColor(0.0f, 0.0f, 1.0f, 1.0f); // устанавливаем синий фон
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    // применяем вращение
     glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();                   // сбрасываем текущую матрицу модели
-                                        //  glTranslatef(0.0f, 0.0f, -5.0f);
-    glRotatef(angle, 1.0f, 1.0f, 0.0f); // вращаем вокруг оси X и Y
+    glLoadIdentity();
+
+    //  glTranslatef(0.0f, 0.0f, -0.5f); // перенос в позицию на экране
+    glRotatef(xRot, 1.0f, 0.0f, 0.0f); // вращаем вокруг оси X
+    glRotatef(yRot, 0.0f, 1.0f, 0.0f); // вращаем вокруг оси Y
 
     // Рисуем куб
     glBegin(GL_QUADS);
@@ -85,8 +86,28 @@ void display() // функция отрисовки
     glEnd(); // заканчиваем рисовать
 
     glutSwapBuffers();
+}
 
-    angle += 0.05f; // изменяем угол следующего кадра
+// Управление клавишами по осям
+void SpecialKeys(int key, int x, int y)
+{
+    if (key == GLUT_KEY_UP) // нажаклавиша Вверх
+        xRot -= 5.0f;
+
+    if (key == GLUT_KEY_DOWN) // нажаклавиша Вниз
+        xRot += 5.0f;
+
+    if (key == GLUT_KEY_LEFT) // нажаклавиша Влево
+        yRot -= 5.0f;
+
+    if (key == GLUT_KEY_RIGHT) // нажаклавиша Вправо
+        yRot += 5.0f;
+
+    xRot = (GLfloat)((const int)xRot % 360); // вычисляем угол поворота по X
+    yRot = (GLfloat)((const int)yRot % 360); // вычисляем угол поворота по Y
+
+    // обновляем окно
+    glutPostRedisplay();
 }
 
 // основная функция
@@ -95,10 +116,13 @@ int main(int argc, char **argv)
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
     glutInitWindowSize(700, 700);
+    // позиция окна
+    glutInitWindowPosition(250, 50);
     glutCreateWindow("Rotate Cub");
 
     initLighting(); // вызываем настройку освещенности
 
+    glutSpecialFunc(SpecialKeys); // поворот по осям с помощью клавиш курсора
     glutDisplayFunc(display);
     glutIdleFunc(display); // вызываем display для обновления сцены
     glutMainLoop();
