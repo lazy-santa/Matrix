@@ -5,7 +5,7 @@
 static GLfloat xRot = 0.0f; // угол поворота по X
 static GLfloat yRot = 0.0f; // угол поворота по Y
 
-GLfloat light_position[] = {1.0f, 1.0f, 1.0f, 0.0f};
+GLfloat light_position[] = {0.0f, 0.0f, 1.0f, 1.0f}; // позиция света
 GLfloat ambient_light[] = {0.2f, 0.2f, 0.2f, 1.0f};  // окружающее
 GLfloat diffuse_light[] = {0.8f, 0.8f, 0.8f, 1.0f};  // диффузионное
 GLfloat specular_light[] = {1.0f, 1.0f, 1.0f, 1.0f}; // зеркальное
@@ -43,6 +43,23 @@ void display() // функция отрисовки
     //  glTranslatef(0.0f, 0.0f, -0.5f); // перенос в позицию на экране
     glRotatef(xRot, 1.0f, 0.0f, 0.0f); // вращаем вокруг оси X
     glRotatef(yRot, 0.0f, 1.0f, 0.0f); // вращаем вокруг оси Y
+
+    glLineWidth(3); // толщина линий
+    // рисуем оси
+    glBegin(GL_LINES);
+
+    glColor3f(1.0f, 0.0f, 0.0f);
+    glVertex3f(0.0f, 0.0f, 0.0f); // ось X
+    glVertex3f(1.0f, 0.0f, 0.0f);
+
+    glColor3f(0.0f, 1.0f, 0.0f);
+    glVertex3f(0.0f, 0.0f, 0.0f); // ось Y
+    glVertex3f(0.0f, 1.0f, 0.0f);
+
+    glColor3f(0.0f, 0.0f, 1.0f);
+    glVertex3f(0.0f, 0.0f, 0.0f); // ось Z
+    glVertex3f(0.0f, 0.0f, 1.0f);
+    glEnd();
 
     // Рисуем танк
     glBegin(GL_QUADS);
